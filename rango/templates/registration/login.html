@@ -1,0 +1,38 @@
+{% extends 'rango/base_bootstrap.html' %}
+{% load staticfiles %}
+Rango-{% block title_block %}Login{% endblock %}
+{% block body_block %}
+<!-- <link href="http://v4-alpha.getbootstrap.com/examples/signin/signin.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="{% static "css/stylesheet.css" %}" />
+<br>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <form class="form-signin" role="form" method="post" action=".">
+            <fieldset>
+                <legend>
+                    Login
+                </legend>
+                {% csrf_token %}
+                <!-- {{ form.as_p }} -->
+                <label for="inputUsername" class="sr-only">Username</label>
+                <input type="text" name="username" id="id_username" class="form-control" placeholder="Username"
+                    required autofocus>
+                <br>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" name="password" id="id_password" class="form-control" placeholder="password"
+                    required>
+                <br>
+                <button class="btn btn-lg btn-primary" type="submit"  value="Submit">Sign in</button>
+            </fieldset>
+
+        </form>
+        <p>
+            Not a member?
+            <a href="{% url 'registration_register' %}">Register</a>
+        </p>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
+
+{% endblock %}

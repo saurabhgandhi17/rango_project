@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load rango_template_tags %}
+
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title>
+        Rango-
+        {% block title_block %}
+        How to Tango With Django!
+        {% endblock %}
+    </title>
+</head>
+
+<body>
+    <div>
+        {% block sidebar_block %}
+        {% get_category_list category%}
+        {% endblock %}
+    </div>
+    <div>
+        <ul>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'index' %}">Index</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'restricted' %}">Restricted Page</a></li>
+            <li><a href="{% url 'auth_logout' %}?next=/rango/">Logout</a></li>
+            <li><a href="{% url 'add_category' %}">Add New Category</a></li>
+            <li><a href="/accounts/password/change/">change password</a></li>
+            {% else %}
+
+            <li><a href="{% url 'registration_register' %}">Sign Up</a></li>
+            <li><a href="{% url 'auth_login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <hr />
+    <div>
+        {% block body_block %}
+        This is body_block's default content.
+        {% endblock %}
+    </div>
+    <p> {{ request.session.visits|add:'1' }} time page visit</p>
+    <p> {{ request.session.visit }} time site visit</p>
+    <!-- <p> This is your {{ request.session.visits }} </p> -->
+</body>
+
+</html>

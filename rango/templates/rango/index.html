@@ -1,0 +1,64 @@
+{% extends 'rango/base_bootstrap.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Home
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron">
+  <h1 class="display-3">Rango says...</h1>
+  {% if user.is_authenticated %}
+  Welcome : <strong>{{ user.username }}</strong>!
+  {% else %}
+  hey there partner!
+  {% endif %}
+</div>
+<div class="row marketing">
+  <div class="col-lg-6">
+    <h4>Most Liked categories</h4>
+    <p>
+      {% if categories %}
+      <ul class="list-group">
+        {% for category in categories %}
+        <!-- <li><a href="/rango/category/{{ category.slug }}">{{ category.name }}</a></li> -->
+        <li class="list-group-item d-flex justify-content-between align-items-center"><a href="{% url 'show_category' category.slug%}">{{ category.name }}
+
+          </a>
+          {% if user.is_authenticated %}
+          <strong data-catid="{{category.id}}" class="btn btn-primary btn-sm">
+            {{ category.likes }}
+          </strong>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <strong>There are no categories present.</strong>
+      {% endif %}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <h4>Most Viewd Page</h4>
+    <p>
+      {% if pages %}
+      <ul class="list-group">
+        {% for page in pages %}
+        <li class="list-group-item d-flex justify-content-between align-items-center"><a href="{{ page.url }}">{{ page.titile }}</a>
+          {% if user.is_authenticated %}
+          <span data-catid="{{page.id}}" class="btn btn-primary btn-sm">
+            {{ page.views }}
+          </span>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <strong>There are no categories present.</strong>
+      {% endif %}
+    </p>
+  </div>
+</div>
+
+<!-- <img src="{% static "images/rangoimg.jpg" %}" alt="Picture of Rango" width="350" height="450" /> -->
+{% endblock %}

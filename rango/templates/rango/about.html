@@ -1,0 +1,32 @@
+{% extends 'rango/base_bootstrap.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+About
+{% endblock %}
+
+{% block body_block%}
+<div>
+    <p>
+        <h1>This tutorial has been put together by:{{name}} </h1>
+        <img src="{% static "images/rangoimg.jpg" %}" alt="Picture of Rango" width="350" height="450" />
+
+        <button class="btn btn-primary" onClick="alert('You clicked the button using JavaScript.');">
+            Click Me - I run JavaScript
+        </button>
+
+
+        <button class="btn btn-primary" id="about-btn">
+            Click Me - I'm JavaScript on Speed</button>
+        <p>This is a example</p>
+        <p>This is another example</p>
+
+        <p>This text is for a JQuery Example</p>
+
+
+        <div id="msg">Hello - I'm here for a JQuery Example too</div>
+    </p>
+</div>
+
+
+{% endblock %}

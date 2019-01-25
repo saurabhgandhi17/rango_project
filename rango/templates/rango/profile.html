@@ -1,0 +1,29 @@
+{% extends 'rango/base_bootstrap.html' %}
+{% load staticfiles %}
+{% block title %}{{ selecteduser.username }} Profile{% endblock %}
+{% block body_block %}
+<br>
+<div class="container">
+
+    <div class="card" style="width:300px">
+        <div class="card bg-primary text-white" style="width:300px">
+            <h4 class="card-title">Username : {{selecteduser.username}}</h4>
+        </div>
+        <br>
+        <img src="{{ MEDIA_URL }}{{userprofile.picture }}" class="card-img-top" width="300" height="300" alt="{{selecteduser.username}}" />
+        <div class="card-body">
+
+            {% if selecteduser.username == user.username %}
+            <form method="post" action="." enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </form>
+            {% else %}
+            <p><strong>Website:</strong> <a href="{{userprofile.website}}">
+                    {{userprofile.website}}</a></p>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    {% endblock %}
